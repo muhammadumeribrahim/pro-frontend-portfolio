@@ -1,88 +1,69 @@
-import Link from "next/link";
-import { ArrowRight, Github, Linkedin } from "lucide-react";
-import { ButtonLink } from "@/components/ui/button-link";
-import { Pill } from "@/components/ui/pill";
 import { profile } from "@/data/profile";
+
+function Pill({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold text-white/90">
+      {children}
+    </span>
+  );
+}
 
 export function Hero() {
   return (
-    <section className="py-14 sm:py-20">
-      <div className="rounded-3xl border border-slate-200 bg-white shadow-soft">
-        <div className="p-6 sm:p-10">
+    <section className="mx-auto max-w-6xl px-4 pt-14 pb-10 sm:pt-20">
+      <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+        <div className="lg:col-span-8">
           <div className="flex flex-wrap items-center gap-2">
             {profile.pills.map((p) => (
               <Pill key={p}>{p}</Pill>
             ))}
           </div>
 
-          <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-center">
-            <div className="lg:col-span-8">
-              <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight">
-                {profile.heroTitle}
-              </h1>
-              <p className="mt-4 text-slate-600 text-base sm:text-lg leading-relaxed">
-                {profile.heroBody}
-              </p>
+          <h1 className="mt-6 text-4xl font-semibold tracking-tight text-white sm:text-6xl">
+            {profile.heroTitle}
+          </h1>
 
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <ButtonLink href="#projects">
-                  {profile.ctaPrimary} <ArrowRight size={16} />
-                </ButtonLink>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
+            {profile.heroBody}
+          </p>
+        </div>
 
-                <div className="flex items-center gap-3 sm:ml-auto">
-                  <Link
-                    href={profile.github}
-                    className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium hover:bg-slate-50"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Github size={16} /> GitHub
-                  </Link>
-                  <Link
-                    href={profile.linkedin}
-                    className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium hover:bg-slate-50"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Linkedin size={16} /> LinkedIn
-                  </Link>
-                </div>
-              </div>
+        <div className="lg:col-span-4">
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_12px_40px_rgba(0,0,0,0.35)]">
+            <p className="text-sm font-semibold text-white">{profile.name}</p>
+            <p className="mt-1 text-sm text-white/70">{profile.headline}</p>
+            <p className="mt-1 text-sm text-white/60">{profile.location}</p>
 
-              <div className="mt-8 grid gap-4 sm:grid-cols-3">
-                {profile.stats.map((s) => (
-                  <Stat key={s.label} label={s.label} value={s.value} />
-                ))}
-              </div>
-            </div>
+            <div className="mt-5 flex flex-col gap-2">
+              <a
+                href={`mailto:${profile.email}`}
+                className="inline-flex items-center justify-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-white/90 transition"
+              >
+                Email
+              </a>
 
-            <div className="lg:col-span-4">
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-                <p className="text-sm font-semibold text-slate-900">
-                  What I build
-                </p>
-                <ul className="mt-3 space-y-2 text-sm text-slate-700">
-                  <li>• Portfolio + landing pages with clean UI</li>
-                  <li>• WordPress + Elementor sites (editable for clients)</li>
-                  <li>• Static websites and front-end builds</li>
-                </ul>
-                <p className="mt-4 text-sm text-slate-600">
-                  Want to collaborate? Use the contact section below.
-                </p>
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href={profile.links.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center rounded-xl border border-white/20 bg-transparent px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 transition"
+                >
+                  GitHub
+                </a>
+                <a
+                  href={profile.links.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center rounded-xl border border-white/20 bg-transparent px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 transition"
+                >
+                  LinkedIn
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4">
-      <p className="text-sm text-slate-600">{label}</p>
-      <p className="mt-1 text-lg font-semibold tracking-tight">{value}</p>
-    </div>
   );
 }

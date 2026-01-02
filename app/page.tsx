@@ -52,7 +52,7 @@ export default function HomePage() {
       >
         <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-md p-7">
           <p className="text-white/90 leading-relaxed max-w-4xl text-base">
-            {profile.about}
+            {profile.aboutBody}
           </p>
         </div>
       </Section>
